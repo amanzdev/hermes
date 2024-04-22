@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Logo](https://raw.githubusercontent.com/amanzdev/hermes/main/.assets/hermes_logo.png)
+
+# Hermes
+
+Hermes is an experimental open source Hospital Management System developed by the Oxsgn team. It is built using NextJS, TailwindCSS, and Supabase. It is a full-stack application that is designed to be easy to use and easy to deploy. It is built with the goal of being a simple and efficient way to manage a hospital or clinic.
 
 ## Getting Started
 
-First, run the development server:
-
+### Local Development
 ```bash
+git clone https://github.com/amanzdev/hermes.git
+cd hermes
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+This will start the development server at `http://localhost:3000`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Production Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Hermes is not yet ready for production use. Please do not deploy it to a production environment.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## License
 
-## Learn More
+This project is licensed under the GNU GPLv3 License - see the [LICENSE](LICENSE.md) file for details.
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Contributors
 
-## Deploy on Vercel
+<a href="https://github.com/amanzdev/hermes/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=amanzdev/hermes" />
+</a>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Made with [contrib.rocks](https://contrib.rocks).
