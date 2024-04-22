@@ -9,7 +9,7 @@ import Navigation from "@/components/admin/navigation";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import * as React from "react";
 import dayjs from 'dayjs';
-import {Button} from "@/components/ui/button";
+import {Button, buttonVariants} from "@/components/ui/button";
 import PatientNoteCard from "@/components/admin/patients/patient-note-card";
 import {Accordion} from "@/components/ui/accordion";
 import {
@@ -19,6 +19,8 @@ import {
     PaginationLink, PaginationNext,
     PaginationPrevious
 } from "@/components/ui/pagination";
+import {cn} from "@/lib/utils";
+import Link from "next/link";
 
 export const metadata: Metadata = {
     title: "Patient Details | Hermes",
@@ -112,7 +114,7 @@ export default function Details() {
                     <CardHeader>
                         <div className="flex flex-row items-center justify-between">
                             <span className="font-semibold">Patient Notes</span>
-                            <Button size="sm">New Note</Button>
+                            <Link href="/doctor/patient/details/notes/new" className={cn(buttonVariants({ size: "sm" }))}>New Note</Link>
                         </div>
                     </CardHeader>
                     <CardContent>
