@@ -2,25 +2,12 @@ import type {Metadata} from "next";
 import {
     Card,
     CardContent,
-    CardDescription,
-    CardFooter,
     CardHeader,
-    CardTitle,
+
 } from "@/components/ui/card"
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
 import Navigation from "@/components/admin/navigation";
-import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import * as React from "react";
-import {Badge} from "@/components/ui/badge";
 import dayjs from 'dayjs';
 import {Button} from "@/components/ui/button";
 import PatientNoteCard from "@/components/admin/patients/patient-note-card";

@@ -11,7 +11,6 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import * as React from "react";
-import {DarkModeToggle} from "@/components/dark-mode-toggle";
 import {useTheme} from "next-themes";
 import {useRouter} from "next/navigation";
 

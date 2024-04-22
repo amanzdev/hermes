@@ -6,11 +6,6 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
 import React from "react";
-
-interface PatientDashboardCardProps {
-    index?: React.Key
-}
-
 export default function PatientDashboardCard() {
     const router = useRouter()
 
