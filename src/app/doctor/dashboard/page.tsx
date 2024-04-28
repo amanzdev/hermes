@@ -1,51 +1,37 @@
 import type {Metadata} from "next";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
 import Navigation from "@/components/admin/navigation";
-import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
 import * as React from "react";
+import {Suspense} from "react";
 import {Badge} from "@/components/ui/badge";
-import dayjs from 'dayjs';
 import {Button} from "@/components/ui/button";
-import PatientDashboardCard from "@/components/admin/cards/patient-dashboard-card";
+import {createClient} from "@/utils/supabase/server";
+import {redirect} from "next/navigation";
+import MySchedule from "@/components/admin/dashboard/my-schedule";
 
 export const metadata: Metadata = {
     title: "Dashboard | Hermes",
     description: "Hermes",
 };
 
-export default function Dashboard() {
+export default async function Dashboard() {
+    const supabase = createClient()
+
+    const {data, error} = await supabase.auth.getUser()
+    if (error || !data?.user) {
+        redirect('/auth/login')
+    }
+
+    const staffProfile = await supabase.from('staff').select().eq('user_id', data.user.id).single()
 
   return (
     <main className="min-h-screen">
-        <Navigation/>
+        <Navigation user={data.user} profile={staffProfile.data}/>
 
         <div className="p-4 grid grid-cols-12 gap-8">
-            <section className="flex flex-col gap-4 col-span-12">
-                <div className="flex flex-row items-start justify-between gap-4">
-                    <div className="flex flex-col">
-                        <span className="font-semibold text-2xl">My Schedule</span>
-                        <span className="text-sm">{dayjs().format('DD MMMM YYYY')}</span>
-                    </div>
-                    <div className="flex flex-row gap-2">
-                        <Button size="sm">Add Appointment</Button>
-                    </div>
-                </div>
-                <ScrollArea className="w-full whitespace-nowrap">
-                    <div className="flex flex-row w-max space-x-4">
-                        {Array.from({length: 10}).map((_, index) => (
-                            <PatientDashboardCard key={index}/>
-                        ))}
-                    </div>
-                    <ScrollBar orientation="horizontal"/>
-                </ScrollArea>
-            </section>
+            <Suspense fallback={<p>Loading feed...</p>}>
+                <MySchedule/>
+            </Suspense>
             <section className="flex flex-col gap-4 col-span-4">
                 <div className="flex flex-row items-start justify-between gap-4">
                     <div className="flex flex-col">

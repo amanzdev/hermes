@@ -5,18 +5,37 @@ import {Menubar, MenubarMenu, MenubarTrigger} from "@/components/ui/menubar";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {
     DropdownMenu,
-    DropdownMenuContent, DropdownMenuGroup,
-    DropdownMenuItem, DropdownMenuPortal,
-    DropdownMenuSeparator, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuPortal,
+    DropdownMenuSeparator,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import * as React from "react";
 import {useTheme} from "next-themes";
 import {useRouter} from "next/navigation";
+import {User} from "@supabase/auth-js";
+import {Tables} from "../../../database.types";
+import {createClient} from "@/utils/supabase/client";
 
-export default function Navigation() {
+interface NavigationProps {
+    user: null | User
+    profile: Tables<'staff'> | null
+}
+
+export default function Navigation({user, profile}: NavigationProps) {
+    const supabase = createClient()
     const router = useRouter()
     const { setTheme } = useTheme()
+
+    const handleSignOut = async () => {
+        await supabase.auth.signOut()
+        router.push('/auth/login')
+    }
 
     return (
         <div className="flex flex-row items-center justify-between">
@@ -49,8 +68,8 @@ export default function Navigation() {
             </div>
             <div className="flex flex-row gap-4 items-center p-4">
                 <div className="flex flex-col items-end">
-                    <span className="text-xs text-gray-500">Welcome back doctor,</span>
-                    <span className="text-sm font-semibold">John Doe</span>
+                    <span className="text-xs text-gray-500">Welcome back,</span>
+                    <span className="text-sm font-semibold">{profile.name}</span>
                 </div>
                 <DropdownMenu>
                     <DropdownMenuTrigger>
@@ -80,7 +99,7 @@ export default function Navigation() {
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator/>
                         <DropdownMenuGroup>
-                            <DropdownMenuItem>
+                            <DropdownMenuItem onClick={handleSignOut}>
                                 Sign out
                             </DropdownMenuItem>
                         </DropdownMenuGroup>

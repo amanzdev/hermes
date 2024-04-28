@@ -12,8 +12,7 @@ export default function LoginForm() {
     const [password, setPassword] = useState<string>('')
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        console.log(email, password);
+        e.preventDefault();
     }
 
     return (
@@ -44,7 +43,8 @@ export default function LoginForm() {
                                 Forgot your password?
                             </Link>
                         </div>
-                        <Input id="password" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <Input id="password" type="password" required value={password}
+                               onChange={(e) => setPassword(e.target.value)}/>
                     </div>
                     <Button type="submit" className="w-full">
                         Login
