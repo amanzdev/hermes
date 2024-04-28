@@ -7,7 +7,9 @@ import {createClient} from "@/utils/supabase/server";
 
 export default async function MySchedule() {
     const supabase = createClient()
-    const appointments = await supabase.from('appointments').select(`time, patients(id,name), departments(name)`).gte('time', dayjs()).order('time').limit(10)
+    const {
+        data
+    } = await supabase.from('appointments').select(`time, patients(id,name), departments(name)`).gte('time', dayjs()).order('time').limit(10)
 
     return (
         <section className="flex flex-col gap-4 col-span-12">
@@ -22,7 +24,7 @@ export default async function MySchedule() {
             </div>
             <ScrollArea className="w-full whitespace-nowrap">
                 <div className="flex flex-row w-max space-x-4">
-                    {appointments.data?.map((appointment, index) => (
+                    {data?.map((appointment, index) => (
                         <PatientDashboardCard key={index} appointment={appointment}/>
                     ))}
                 </div>

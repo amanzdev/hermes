@@ -9,7 +9,16 @@ import React from "react";
 import dayjs from 'dayjs';
 
 interface PatientDashboardCardProps {
-    appointment: any
+    appointment: {
+        time: string;
+        patients: {
+            id: string;
+            name: string;
+        } | null;
+        departments: {
+            name: string;
+        } | null;
+    }
 }
 
 export default function PatientDashboardCard({appointment}: PatientDashboardCardProps) {
@@ -30,19 +39,20 @@ export default function PatientDashboardCard({appointment}: PatientDashboardCard
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row items-center gap-2">
                         <Avatar>
-                            <AvatarImage src="https://github.com/shadcn.png"/>
+                            <AvatarImage
+                                src={'https://api.dicebear.com/8.x/adventurer-neutral/png?seed=' + appointment.patients?.name}/>
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
                         <div className="flex flex-col">
-                            <span className="line-clamp-1 text-ellipsis text-sm">{appointment.patients.name}</span>
-                            <span className="text-xs">{appointment.departments.name}</span>
+                            <span className="line-clamp-1 text-ellipsis text-sm">{appointment.patients?.name}</span>
+                            <span className="text-xs">{appointment.departments?.name}</span>
                         </div>
                     </div>
                 </div>
             </CardContent>
             <CardFooter>
                 <div className="flex flex-row gap-2">
-                    <Button onClick={() => router.push('/doctor/patient/' + appointment.patients.id)} size="sm"
+                    <Button onClick={() => router.push('/doctor/patient/' + appointment.patients?.id)} size="sm"
                             variant="outline">View
                         Patient</Button>
                 </div>

@@ -27,7 +27,7 @@ interface NavigationProps {
     profile: Tables<'staff'> | null
 }
 
-export default function Navigation({user, profile}: NavigationProps) {
+export default function Navigation({profile}: NavigationProps) {
     const supabase = createClient()
     const router = useRouter()
     const { setTheme } = useTheme()
@@ -69,12 +69,13 @@ export default function Navigation({user, profile}: NavigationProps) {
             <div className="flex flex-row gap-4 items-center p-4">
                 <div className="flex flex-col items-end">
                     <span className="text-xs text-gray-500">Welcome back,</span>
-                    <span className="text-sm font-semibold">{profile.name}</span>
+                    <span className="text-sm font-semibold">{profile?.name}</span>
                 </div>
                 <DropdownMenu>
                     <DropdownMenuTrigger>
                         <Avatar>
-                            <AvatarImage src="https://github.com/shadcn.png"/>
+                            <AvatarImage
+                                src={'https://api.dicebear.com/8.x/adventurer-neutral/png?seed=' + profile?.name}/>
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
                     </DropdownMenuTrigger>

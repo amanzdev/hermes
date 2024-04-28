@@ -12,7 +12,7 @@ export default async function PatientDetails({params, className}: {
     className?: string | undefined
 }) {
     const supabase = createClient()
-    const patientProfile = await supabase.from('patients').select().eq('id', params.id).single();
+    const {data} = await supabase.from('patients').select().eq('id', params.id).single();
 
     return (
         <Card className={cn(className)}>
@@ -20,14 +20,15 @@ export default async function PatientDetails({params, className}: {
                 <div className="flex flex-row items-start justify-between">
                     <div className="flex flex-row items-center gap-4">
                         <Avatar className="w-20 h-20">
-                            <AvatarImage src="https://github.com/shadcn.png"/>
+                            <AvatarImage
+                                src={'https://api.dicebear.com/8.x/adventurer-neutral/png?seed=' + data?.name}/>
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
                         <div className="flex flex-col gap-1">
-                            <span className="font-semibold text-xlnp">{patientProfile.data.name}</span>
+                            <span className="font-semibold text-xlnp">{data?.name}</span>
                             <div className="flex flex-row items-center gap-2 text-sm text-gray-400">
-                                <span>Sex: <span className="capitalize">{patientProfile.data.gender}</span></span>
-                                <span>Age: {calculateAge(dayjs(patientProfile.data.birthdate).toDate())}</span>
+                                <span>Sex: <span className="capitalize">{data?.gender}</span></span>
+                                <span>Age: {calculateAge(dayjs(data?.birthdate).toDate())}</span>
                             </div>
                         </div>
                     </div>
