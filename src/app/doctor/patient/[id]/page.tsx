@@ -3,14 +3,13 @@ import {Card, CardContent, CardHeader,} from "@/components/ui/card"
 import Navigation from "@/components/admin/navigation";
 import * as React from "react";
 import {Suspense} from "react";
-import {Button, buttonVariants} from "@/components/ui/button";
-import {cn} from "@/lib/utils";
-import Link from "next/link";
+import {Button} from "@/components/ui/button";
 import {createClient} from "@/utils/supabase/server";
 import {redirect} from "next/navigation";
 import PatientDetails from "@/components/admin/patients/patient-details";
 import PatientNotes from "@/components/admin/patients/patient-notes";
 import PatientPrescriptions from "@/components/admin/patients/patient-prescriptions";
+import PatientNewNoteSheet from "@/components/admin/patients/patient-new-note-sheet";
 
 export const metadata: Metadata = {
     title: "Patient Details | Hermes",
@@ -58,8 +57,7 @@ export default async function Details({params}: { params: { id: string } }) {
                     <CardHeader>
                         <div className="flex flex-row items-center justify-between">
                             <span className="font-semibold">Patient Notes</span>
-                            <Link href={"/doctor/patient/" + params.id + "/notes/new"}
-                                  className={cn(buttonVariants({size: "sm"}))}>New Note</Link>
+                            <PatientNewNoteSheet patientId={params.id} doctorId={staffProfile.data!.id}/>
                         </div>
                     </CardHeader>
                     <CardContent>

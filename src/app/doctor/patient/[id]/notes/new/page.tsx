@@ -2,7 +2,6 @@ import type {Metadata} from "next";
 import Navigation from "@/components/admin/navigation";
 import * as React from "react";
 import {Suspense} from "react";
-import PatientNoteTextarea from "@/components/admin/patients/patient-note-textarea";
 import {createClient} from "@/utils/supabase/server";
 import {redirect} from "next/navigation";
 import PatientDetails from "@/components/admin/patients/patient-details";
@@ -31,7 +30,6 @@ export default async function NewPatientNote({params}: { params: { id: string } 
                     <PatientDetails className="col-span-full" params={{id: params.id}}/>
                 </Suspense>
                 <div className="flex flex-col gap-4 col-span-12">
-                    <PatientNoteTextarea patientId={params.id} doctorId={staffProfile.data!.id}/>
                 </div>
             </div>
         </main>
