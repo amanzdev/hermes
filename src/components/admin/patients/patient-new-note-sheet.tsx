@@ -12,6 +12,7 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 import {ChevronDownIcon, FontBoldIcon, FontItalicIcon, UnderlineIcon} from "@radix-ui/react-icons";
 import * as React from "react";
 import {useState} from "react";
+import {useRouter} from "next/navigation";
 
 interface PatientNewNoteSheetProps {
     patientId: string,
@@ -19,6 +20,7 @@ interface PatientNewNoteSheetProps {
 }
 
 export default function PatientNewNoteSheet({patientId, doctorId}: PatientNewNoteSheetProps) {
+    const router = useRouter();
     const supabase = createClient();
     const [open, setOpen] = useState(false);
     const [showError, setShowError] = useState(false);
@@ -54,12 +56,13 @@ export default function PatientNewNoteSheet({patientId, doctorId}: PatientNewNot
         } else {
             setOpen(false);
             toast('Note saved.')
+            router.refresh();
         }
     }
 
     return (
         <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger><Button size="sm">New Note</Button></SheetTrigger>
+            <SheetTrigger asChild><Button size="sm">New Note</Button></SheetTrigger>
             <SheetContent className="sm:!max-w-6xl">
                 <SheetHeader>
                     <SheetTitle>New Patient Note</SheetTitle>

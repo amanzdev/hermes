@@ -65,6 +65,17 @@ export default function Navigation({profile}: NavigationProps) {
                         <MenubarTrigger>Prescriptions</MenubarTrigger>
                     </MenubarMenu>
                 </Menubar>
+                <Menubar>
+                    <MenubarMenu>
+                        <MenubarTrigger onClick={() => router.push('/admin/patients')}>Patients</MenubarTrigger>
+                    </MenubarMenu>
+                    <MenubarMenu>
+                        <MenubarTrigger onClick={() => router.push('/admin/medicines')}>Medicines</MenubarTrigger>
+                    </MenubarMenu>
+                    <MenubarMenu>
+                        <MenubarTrigger onClick={() => router.push('/admin/staffs')}>Staffs</MenubarTrigger>
+                    </MenubarMenu>
+                </Menubar>
             </div>
             <div className="flex flex-row gap-4 items-center p-4">
                 <div className="flex flex-col items-end">

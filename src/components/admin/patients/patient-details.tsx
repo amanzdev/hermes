@@ -6,6 +6,8 @@ import {Button} from "@/components/ui/button";
 import * as React from "react";
 import {createClient} from "@/utils/supabase/server";
 import {cn} from "@/lib/utils";
+import PatientUpdateSheet from "@/components/admin/patients/patient-update-sheet";
+import DeletePatientDialog from "@/components/admin/patients/delete-patient-dialog";
 
 export default async function PatientDetails({params, className}: {
     params: { id: string },
@@ -33,8 +35,8 @@ export default async function PatientDetails({params, className}: {
                         </div>
                     </div>
                     <div className="flex flex-row gap-2">
-                        <Button size="sm">Edit Patient</Button>
-                        <Button size="sm" variant="destructive">Delete Patient</Button>
+                        <PatientUpdateSheet patient={data!}/>
+                        <DeletePatientDialog patientId={data?.id!}/>
                     </div>
                 </div>
             </CardHeader>

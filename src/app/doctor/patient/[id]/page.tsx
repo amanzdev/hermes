@@ -10,6 +10,9 @@ import PatientDetails from "@/components/admin/patients/patient-details";
 import PatientNotes from "@/components/admin/patients/patient-notes";
 import PatientPrescriptions from "@/components/admin/patients/patient-prescriptions";
 import PatientNewNoteSheet from "@/components/admin/patients/patient-new-note-sheet";
+import PatientAppointmentCard from "@/components/admin/patients/patient-appointment-card";
+import PatientNewAppointmentSheet from "@/components/admin/patients/patient-new-appointment-sheet";
+import PatientNewPrescriptionSheet from "@/components/admin/patients/patient-new-prescription-sheet";
 
 export const metadata: Metadata = {
     title: "Patient Details | Hermes",
@@ -38,7 +41,7 @@ export default async function Details({params}: { params: { id: string } }) {
                     <CardHeader>
                         <div className="flex flex-row items-center justify-between">
                             <span className="font-semibold">Latest Prescription</span>
-                            <Button size="sm">New Prescription</Button>
+                            <PatientNewPrescriptionSheet patientId={params.id} doctorId={staffProfile.data!.id}/>
                         </div>
                     </CardHeader>
                     <CardContent>
@@ -53,17 +56,32 @@ export default async function Details({params}: { params: { id: string } }) {
                         </div>
                     </CardHeader>
                 </Card>
-                <Card className="col-span-8">
-                    <CardHeader>
-                        <div className="flex flex-row items-center justify-between">
-                            <span className="font-semibold">Patient Notes</span>
-                            <PatientNewNoteSheet patientId={params.id} doctorId={staffProfile.data!.id}/>
-                        </div>
-                    </CardHeader>
-                    <CardContent>
-                        <PatientNotes patientId={params.id}/>
-                    </CardContent>
-                </Card>
+                <div className="col-span-8">
+                    <Card>
+                        <CardHeader>
+                            <div className="flex flex-row items-center justify-between">
+                                <span className="font-semibold">Patient Notes</span>
+                                <PatientNewNoteSheet patientId={params.id} doctorId={staffProfile.data!.id}/>
+                            </div>
+                        </CardHeader>
+                        <CardContent>
+                            <PatientNotes patientId={params.id}/>
+                        </CardContent>
+                    </Card>
+                </div>
+                <div className="col-span-4">
+                    <Card>
+                        <CardHeader>
+                            <div className="flex flex-row items-center justify-between">
+                                <span className="font-semibold">Appointments</span>
+                                <PatientNewAppointmentSheet patientId={params.id} doctorId={staffProfile.data!.id}/>
+                            </div>
+                        </CardHeader>
+                        <CardContent>
+                            <PatientAppointmentCard patientId={params.id}/>
+                        </CardContent>
+                    </Card>
+                </div>
             </div>
         </main>
     );
